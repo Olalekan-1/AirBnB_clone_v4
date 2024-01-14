@@ -18,6 +18,18 @@ $(document).ready(function () {
 
   function updateSelectedAmenities () {
     const amenitiesList = Object.values(selectedAmenities).join(', ');
-    $('.selected-amenities').text(amenitiesList);
+    $('#selected-amenities').text('Selected Amenities: ' + amenitiesList);
+  }
+
+  checkApiStatus();
+
+  function checkApiStatus () {
+    $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
+      if (data.status === 'OK') {
+        $('#api_status').addClass('available');
+      } else {
+        $('#api_status').removeClass('available');
+      }
+    });
   }
 });
